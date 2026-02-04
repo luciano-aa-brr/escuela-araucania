@@ -1,14 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escuela Araucania</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Escuela Araucanía 510 Labranza</title>
+    <style>
+        /* Definimos el color exacto del logo */
+        .bg-escuela-yellow { background-color: #FFFD01; }
+        .text-escuela-yellow { color: #FFFD01; }
+    </style>
 </head>
-<body>
-    <h1>Escuela Araucania</h1>
-    <p>Bienvenidos a la Escuela Araucania, un lugar de aprendizaje y crecimiento para todos nuestros estudiantes. Aquí encontrarás una comunidad dedicada a la excelencia académica y al desarrollo personal.</p>
+<body class="bg-gray-50 text-gray-900 font-sans">
 
-    
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="logo.png" alt="Logo" class="h-12">
+                <span class="font-bold text-lg hidden md:block">Escuela Araucanía</span>
+            </div>
+            <nav class="space-x-8 font-medium">
+                <a href="#" class="hover:text-yellow-600">Inicio</a>
+                <a href="#" class="hover:text-yellow-600">Nosotros</a>
+                <a href="#" class="bg-escuela-yellow px-4 py-2 rounded-lg border border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-y-1 hover:shadow-none">Matrícula</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="relative bg-black h-[70vh] flex items-center justify-center text-center text-white">
+        <div class="absolute inset-0 opacity-50 bg-[url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3')] bg-cover bg-center"></div>
+        <div class="relative z-10 px-4">
+            <h1 class="text-5xl md:text-7xl font-black mb-4 uppercase italic">Escuela Araucanía 510</h1>
+            <p class="text-xl md:text-2xl font-light">"Escuela con trayectoria educando en valores"</p>
+        </div>
+    </section>
+
+    <footer class="bg-black text-white py-10 mt-20">
+        <div class="container mx-auto px-6 text-center">
+            <p>© 2026 Escuela Araucanía 510 Labranza - Desarrollado por KoaLink</p>
+        </div>
+    </footer>
+
 </body>
 </html>
