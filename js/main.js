@@ -67,4 +67,53 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     console.log("KoaLink: Sistema de navegación y scroll optimizado correctamente.");
+
+    // ------------------------------------------------------
+    // Sección de noticias dinámicas
+    // Modifica el arreglo "noticias" para agregar, editar o eliminar entradas.
+    // Cada elemento puede tener título, fecha y contenido.
+    const noticias = [
+        {
+            title: "Inicio de clases 2026",
+            date: "1 de marzo de 2026",
+            content: "La comunidad educativa se reúne para celebrar el inicio del nuevo año escolar."
+        },
+        {
+            title: "Taller de reciclaje",
+            date: "15 de abril de 2026",
+            content: "Nuestros estudiantes participaron en un taller sobre gestión de residuos y cuidado del medio ambiente."
+        }
+    ];
+
+    function renderNoticias() {
+        const container = document.getElementById('news-container');
+        if (!container) return;
+
+        if (noticias.length === 0) {
+            container.innerHTML = '<p class="text-center text-gray-500">No hay noticias disponibles por el momento.</p>';
+            return;
+        }
+
+        noticias.forEach(nota => {
+            const article = document.createElement('article');
+            article.className = 'border-l-4 border-escuela-yellow pl-6';
+
+            const titulo = document.createElement('h3');
+            titulo.className = 'text-2xl font-bold mb-1';
+            titulo.textContent = nota.title;
+
+            const fecha = document.createElement('p');
+            fecha.className = 'text-gray-500 text-sm mb-4';
+            fecha.textContent = nota.date;
+
+            const texto = document.createElement('p');
+            texto.className = 'text-gray-800';
+            texto.textContent = nota.content;
+
+            article.append(titulo, fecha, texto);
+            container.append(article);
+        });
+    }
+
+    renderNoticias();
 });
