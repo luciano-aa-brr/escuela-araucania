@@ -68,20 +68,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log("KoaLink: Sistema de navegación y scroll optimizado correctamente.");
 
-    // ------------------------------------------------------
     // Sección de noticias dinámicas
-    // Modifica el arreglo "noticias" para agregar, editar o eliminar entradas.
-    // Cada elemento puede tener título, fecha y contenido.
+  
     const noticias = [
         {
             title: "Inicio de clases 2026",
-            date: "1 de marzo de 2026",
+            date: "Proximamente",
             content: "La comunidad educativa se reúne para celebrar el inicio del nuevo año escolar."
-        },
-        {
-            title: "Taller de reciclaje",
-            date: "15 de abril de 2026",
-            content: "Nuestros estudiantes participaron en un taller sobre gestión de residuos y cuidado del medio ambiente."
         }
     ];
 
