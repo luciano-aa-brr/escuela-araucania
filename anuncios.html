@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anuncios | Escuela Araucanía 510</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50 overflow-x-hidden">
+
+    <header id="navbar" class="w-full fixed top-0 z-50 transition-all duration-300 bg-transparent py-4 md:py-6">
+        <div class="max-w-[95%] mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="img/logo.png" alt="Logo" class="h-10 md:h-14 w-auto">
+                <div id="nav-text" class="flex flex-col leading-tight text-white transition-all duration-300 no-shadow">
+                    <span class="font-black text-lg md:text-xl uppercase tracking-tighter">Escuela Araucanía 510</span>
+                    <span class="text-[10px] font-bold opacity-80 uppercase tracking-widest">Labranza</span>
+                </div>
+            </div>
+
+            <nav id="nav-links-container" class="hidden xl:flex items-center space-x-6 font-black uppercase text-xs tracking-tighter text-white no-shadow">
+                <a href="index.html" class="hover:text-escuela-yellow transition">Inicio</a>
+                <a href="anuncios.html" class="hover:text-escuela-yellow transition">Anuncios</a>
+                <a href="galeria.html" class="hover:text-escuela-yellow transition">Galería</a>
+                <a href="documentos.html" class="hover:text-escuela-yellow transition">Documentos</a>
+                <a href="diario-digital.html" id="btn-diario" class="bg-escuela-yellow text-black px-5 py-2 rounded-full font-black hover:bg-white hover:text-black transition-all duration-300 border-2 border-transparent">
+    Diario Estudiantil
+</a>
+            </nav>
+
+            <button id="menu-btn" class="xl:hidden text-white p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden xl:hidden bg-white w-full absolute top-full left-0 border-b border-gray-200 shadow-2xl animate-fade-in-down">
+            <nav class="flex flex-col p-6 space-y-4 font-black uppercase text-gray-800">
+                <a href="index.html" class="py-2 border-b border-gray-100">Inicio</a>
+                <a href="anuncios.html" class="py-2 border-b border-gray-100">Anuncios</a>
+                <a href="galeria.html" class="py-2 border-b border-gray-100">Galería</a>
+                <a href="documentos.html" class="py-2 border-b border-gray-100">Documentos</a>
+                <a href="diario-digital.html" class="py-4 text-center bg-escuela-yellow rounded-xl text-black">Diario Estudiantil</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="relative h-[60vh] bg-black flex items-center justify-center text-center overflow-hidden">
+        <img src="img/escuelaFront.jpg" class="absolute inset-0 w-full h-full object-cover opacity-40">
+        <div class="relative z-10 px-6">
+            <h1 class="text-4xl md:text-8xl font-black text-white uppercase italic no-shadow">Panel de <span class="text-escuela-yellow">Anuncios</span></h1>
+            <p class="text-white font-bold uppercase tracking-[0.2em] mt-4 text-[10px] md:text-sm">Comunicados oficiales para la comunidad</p>
+        </div>
+    </section>
+
+    <main class="py-10 md:py-20 max-w-5xl mx-auto px-6">
+    <div id="anuncios-grid" class="flex flex-col space-y-4"></div>
+</main>
+
+<div id="anuncio-modal" class="hidden fixed inset-0 z-[100] overflow-y-auto bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-3xl rounded-3xl relative animate-fade-in-down overflow-hidden">
+        <button id="cerrar-modal-anuncio" class="absolute top-6 right-6 bg-escuela-yellow text-black w-10 h-10 rounded-full font-black z-10 hover:bg-black hover:text-white transition-all">✕</button>
+        
+        <div id="modal-anuncio-body" class="p-8 md:p-12">
+            </div>
+    </div>
+</div>
+
+    <footer class="bg-black text-white py-12 text-center text-[10px] font-bold uppercase tracking-widest">
+        <p>© 2026 Escuela Araucanía 510 — Labranza</p>
+        <p class="mt-2 text-gray-500">Desarrollado por KoaLink</p>
+
+    
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/anuncios.js"></script>
+</body>
+</html>

@@ -1,293 +1,180 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <link rel="icon" type="image/png" href="img/logo.png" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escuela Araucanía 510 | Labranza</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Escuela Araucanía 510 Labranza</title>
-    <meta
-      name="description"
-      content="Escuela Araucanía 510 de Labranza: Institución educativa con trayectoria, comprometida con la formación en valores y excelencia académica en la Región de la Araucanía."
-    />
-    <meta
-      name="keywords"
-      content="Escuela Araucanía, Labranza, educación, colegio Labranza, valores, excelencia académica, escuela 510"
-    />
-    <meta name="author" content="KoaLink" />
-    <meta name="robots" content="index, follow" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 overflow-x-hidden">
 
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://tu-dominio.cl/" />
-    <meta
-      property="og:title"
-      content="Escuela Araucanía 510 - Educando en Valores"
-    />
-    <meta
-      property="og:description"
-      content="Formamos personas integrales en Labranza con una educación basada en la excelencia."
-    />
-    <meta property="og:image" content="https://tu-dominio.cl/img/fachada.jpg" />
+    <header id="navbar" class="w-full fixed top-0 z-50 transition-all duration-300 bg-transparent py-4 md:py-6">
+        <div class="max-w-[95%] mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="img/logo.png" alt="Logo" class="h-10 md:h-14 w-auto">
+                <div id="nav-text" class="flex flex-col leading-tight text-white transition-all duration-300 no-shadow">
+                    <span class="font-black text-lg md:text-xl uppercase tracking-tighter">Escuela Araucanía 510</span>
+                    <span class="text-[10px] font-bold opacity-80 uppercase tracking-widest">Labranza</span>
+                </div>
+            </div>
 
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content="Escuela Araucanía 510 - Labranza" />
-    <meta
-      property="twitter:description"
-      content="Conoce nuestra propuesta educativa basada en valores y compromiso social."
-    />
-    <style>
-      :root {
-        --escuela-yellow: #f5f300;
-        --escuela-gray: #808080;
-      }
-      .bg-escuela-yellow {
-        background-color: var(--escuela-yellow);
-      }
-      .text-escuela-yellow {
-        color: var(--escuela-yellow);
-      }
-      .bg-escuela-gray {
-        background-color: var(--escuela-gray);
-      }
+            <nav id="nav-links-container" class="hidden xl:flex items-center space-x-6 font-black uppercase text-xs tracking-tighter text-white no-shadow">
+                <a href="index.html" class="hover:text-escuela-yellow transition">Inicio</a>
+                <a href="anuncios.html" class="hover:text-escuela-yellow transition">Anuncios</a>
+                <a href="galeria.html" class="hover:text-escuela-yellow transition">Galería</a>
+                <a href="documentos.html" class="hover:text-escuela-yellow transition">Documentos</a>
+                <a href="diario-digital.html" id="btn-diario" class="bg-escuela-yellow text-black px-5 py-2 rounded-full font-black hover:bg-white hover:text-black transition-all duration-300 border-2 border-transparent">
+    Diario Estudiantil
+</a>
+            </nav>
 
-      html {
-        scroll-behavior: smooth;
-      }
-
-      .shadow-text {
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-      }
-    </style>
-  </head>
-  <body class="bg-white text-gray-800 font-sans overflow-x-hidden">
-    <header
-      id="navbar"
-      class="w-full fixed top-0 z-50 transition-all duration-300 bg-transparent py-6"
-    >
-      <div
-        class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center"
-      >
-        <div class="flex items-center space-x-4">
-          <img
-            src="img/logo.png"
-            alt="Logo"
-            class="h-14 w-auto drop-shadow-md"
-          />
-          <div
-            id="nav-text"
-            class="flex flex-col leading-tight text-white transition-all duration-300 shadow-text"
-          >
-            <span class="font-black text-xl uppercase tracking-tighter"
-              >Escuela Araucanía 510</span
-            >
-            <span class="text-xs font-bold opacity-80 uppercase tracking-widest"
-              >Labranza</span
-            >
-          </div>
+            <button id="menu-btn" class="xl:hidden text-white p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
         </div>
 
-        <nav
-          id="nav-links"
-          class="hidden md:flex space-x-12 font-black uppercase text-sm tracking-widest text-white transition-all duration-300 shadow-text"
-        >
-          <a href="#inicio" class="hover:text-escuela-yellow transition"
-            >Inicio</a
-          >
-          <a href="#nosotros" class="hover:text-escuela-yellow transition"
-            >Nosotros</a
-          >
-          <a href="#noticias" class="hover:text-escuela-yellow transition"
-            >Noticias</a
-          >
-          <a href="#galeria" class="hover:text-escuela-yellow transition"
-            >Galería</a
-          >
-        </nav>
-
-        <button
-          id="menu-btn"
-          class="md:hidden text-white transition-colors duration-300"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-8 w-8"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16m-7 6h7"
-            />
-          </svg>
-        </button>
-      </div>
-
-      <div
-        id="mobile-menu"
-        class="hidden md:hidden bg-white w-full absolute top-full left-0 border-b border-gray-200 shadow-xl"
-      >
-        <nav
-          class="flex flex-col p-6 space-y-4 font-black uppercase text-center"
-        >
-          <a href="#inicio" class="mobile-link py-2 border-b border-gray-50"
-            >Inicio</a
-          >
-          <a href="#nosotros" class="mobile-link py-2 border-b border-gray-50"
-            >Nosotros</a
-          >
-          <a href="#noticias" class="mobile-link py-2 border-b border-gray-50"
-            >Noticias</a
-          >
-          <a href="#galeria" class="mobile-link py-2">Galería</a>
-        </nav>
-      </div>
+        <div id="mobile-menu" class="hidden xl:hidden bg-white w-full absolute top-full left-0 border-b border-gray-200 shadow-2xl animate-fade-in-down">
+            <nav class="flex flex-col p-6 space-y-4 font-black uppercase text-gray-800">
+                <a href="index.html" class="py-2 border-b border-gray-100">Inicio</a>
+                <a href="anuncios.html" class="py-2 border-b border-gray-100">Anuncios</a>
+                <a href="galeria.html" class="py-2 border-b border-gray-100">Galería</a>
+                <a href="documentos.html" class="py-2 border-b border-gray-100">Documentos</a>
+                <a href="diario-digital.html" class="py-4 text-center bg-escuela-yellow rounded-xl text-black">Diario Estudiantil</a>
+            </nav>
+        </div>
     </header>
 
-    <section
-      id="inicio"
-      class="relative w-full h-screen flex items-center justify-center text-center bg-black"
-    >
-      <div class="absolute inset-0">
-        <img
-          src="img/escuelaFront.jpg"
-          alt="Fachada Escuela"
-          class="w-full h-full object-cover opacity-50"
-        />
-        <div class="absolute inset-0 bg-black/30"></div>
-      </div>
+    <section id="inicio" class="relative h-[85vh] md:h-screen w-full flex items-center justify-center bg-black">
+        <img src="img/escuelaFront.jpg" class="absolute inset-0 w-full h-full object-cover opacity-60">
+        <div class="relative z-10 text-center px-4">
+            <h2 class="text-4xl md:text-8xl lg:text-9xl font-black text-white uppercase italic leading-none no-shadow">
+                Educando en <br><span class="text-escuela-yellow">Valores</span>
+            </h2>
+            <div class="mt-8 inline-flex items-center space-x-4 bg-white/10 backdrop-blur-md px-6 py-3 rounded-full border border-white/20">
+                <span class="text-white font-bold uppercase text-[10px] md:text-sm tracking-widest">100% Excelencia Académica (SNED) 2026/2027</span>
+                <span>🏆</span>
+            </div>
+        </div>
+    </section>
 
-      <div class="relative z-10 px-6">
-        <h2
-          class="text-5xl md:text-9xl font-black text-white uppercase italic leading-none md:shadow-text"
-        >
-          Educando en <br />
-          <span class="text-escuela-yellow">Valores</span>
-        </h2>
-        <p
-          class="text-white text-lg md:text-2xl mt-4 font-light tracking-[0.2em] uppercase shadow-text"
-        >
-          Trayectoria y Compromiso en Labranza
+    <section class="py-12 md:py-24 bg-white">
+    <div class="max-w-5xl mx-auto px-4 md:px-6 text-center">
+        
+        <div class="space-y-4 mb-8">
+            <h3 class="text-escuela-yellow font-black uppercase tracking-[0.2em] text-[10px] md:text-sm">
+                Bienvenidos
+            </h3>
+            <h2 class="text-3xl sm:text-5xl md:text-7xl font-black uppercase italic leading-[1.1] md:leading-none">
+                Compromiso con el <br class="hidden sm:block">
+                <span class="text-escuela-yellow">Futuro de Labranza</span>
+            </h2>
+        </div>
+
+        <p class="text-gray-600 leading-relaxed text-base md:text-xl font-medium max-w-2xl mx-auto mb-10 px-2">
+            En la Escuela Araucanía 510, nos dedicamos a cultivar no solo el intelecto, sino también el corazón de nuestros estudiantes. Somos un referente de formación en la región.
         </p>
-      </div>
+        
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-8">
+            <a href="anuncios.html" class="w-full sm:w-auto border-b-4 md:border-b-8 border-black font-black uppercase italic text-xl md:text-2xl py-2 transition-transform hover:translate-x-2">
+                Ver Anuncios
+            </a>
+            
+            <button id="btn-ver-himno" class="w-full sm:w-auto flex justify-center items-center space-x-3 bg-escuela-yellow text-black px-6 md:px-10 py-3 md:py-4 rounded-full font-black uppercase italic border-2 md:border-4 border-black hover:bg-black hover:text-white transition-all">
+                <span class="text-xl md:text-2xl">🎵</span>
+                <span class="text-sm md:text-base">Ver Himno</span>
+            </button>
+        </div>
+
+    </div>
+</section>
+
+<div id="himno-lightbox" class="hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4">
+    <button id="cerrar-himno" class="absolute top-4 right-4 md:top-8 md:right-8 bg-escuela-yellow text-black w-12 h-12 rounded-full font-black text-2xl z-10">✕</button>
+    
+    <div class="relative w-full max-w-2xl animate-fade-in-down">
+        <img src="img/himnoEscuela.jpg" alt="Himno" class="w-full h-auto rounded-xl shadow-2xl border-2 border-white/20">
+    </div>
+</div>
+
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-12">
+                <h2 class="text-4xl font-black uppercase italic border-b-8 border-escuela-yellow inline-block">Últimas Noticias</h2>
+                <a href="diario-digital.html" class="text-xs font-black uppercase border-b-2 border-black pb-1">Ver todas</a>
+            </div>
+            <div id="noticias-container" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                </div>
+        </div>
     </section>
 
-    <section
-      id="nosotros"
-      class="bg-escuela-gray py-24 px-8 md:px-16 text-white"
-    >
-      <div
-        class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
-      >
-        <div>
-          <h2 class="text-5xl font-black uppercase mb-8 italic leading-tight">
-            Nuestra Institución
-          </h2>
-          <p class="text-lg leading-relaxed mb-8 font-medium">
-            La Escuela Araucanía 510 de Labranza se dedica a formar personas
-            integrales, enfocándose en una educación de calidad basada en
-            valores sólidos que permitan a nuestros estudiantes enfrentar los
-            desafíos del futuro.
-          </p>
-          <div class="h-2 w-24 bg-escuela-yellow"></div>
+    <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 text-center mb-12">
+        <h2 class="text-4xl font-black uppercase italic">Encuéntranos</h2>
+        <p class="text-gray-500 uppercase font-bold tracking-widest mt-2">1 Oriente 510, Labranza, Temuco</p>
+    </div>
+    <div class="w-full h-[450px] relative">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2965.0981635454687!2d-72.75720142424726!3d-38.76547777175251!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x96152bbdfa5183a5%3A0x1ac14bd54213c347!2sEscuela%20Araucan%C3%ADa%20510!5e1!3m2!1ses!2scl!4v1773340879376!5m2!1ses!2scl"
+            class="absolute inset-0 w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-700" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+</section>
+
+
+    <footer class="bg-black text-white pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-16 border-b border-white/10 pb-16">
+            <div>
+                <img src="img/logo.png" alt="Logo" class="h-16 mb-6">
+                <h4 class="text-xl font-black uppercase italic mb-4">Escuela Araucanía 510</h4>
+                <p class="text-gray-400 text-sm leading-relaxed">Educando en valores para construir una comunidad más fuerte, solidaria y excelente.</p>
+            </div>
+            <div>
+                <h4 class="text-lg font-black uppercase italic mb-6">Navegación</h4>
+                <ul class="space-y-3 text-sm font-bold uppercase text-gray-400">
+                    <li><a href="index.html" class="hover:text-escuela-yellow transition">Inicio</a></li>
+                    <li><a href="anuncios.html" class="hover:text-escuela-yellow transition">Anuncios</a></li>
+                    <li><a href="galeria.html" class="hover:text-escuela-yellow transition">Galería</a></li>
+                    <li><a href="documentos.html" class="hover:text-escuela-yellow transition">Documentos Oficiales</a></li>
+                    <li><a href="diario-digital.html" class="hover:text-escuela-yellow transition">Voz Estudiantil</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-black uppercase italic mb-6">Contacto</h4>
+                <ul class="space-y-4 text-sm text-gray-400">
+                    <li class="flex items-start space-x-3">
+                        <i class="fas fa-map-marker-alt text-escuela-yellow mt-1"></i>
+                        <span>Labranza, Región de la Araucanía, Chile.</span>
+                    </li>
+                    <li class="flex items-center space-x-3">
+                        <i class="fas fa-phone text-escuela-yellow"></i>
+                        <span>+56 9 XXXX XXXX</span>
+                    </li>
+                    <li class="flex items-center space-x-3">
+                        <i class="fas fa-envelope text-escuela-yellow"></i>
+                        <span>contacto@escuelaaraucania.cl</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 pt-8 flex flex-col md:flex-row justify-between items-center text-[10px] font-bold uppercase tracking-widest text-gray-500">
+            <p>© 2026 Escuela Araucanía 510. Todos los derechos reservados.</p>
+            <p>Desarrollado por <span class="text-white">KoaLink</span></p>
+            
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div
-            class="bg-white/10 border border-white/20 p-8 rounded-2xl backdrop-blur-sm text-center"
-          >
-            <h3
-              class="text-escuela-yellow text-3xl font-black italic tracking-tighter"
-            >
-              Excelencia
-            </h3>
-            <span class="text-xs uppercase font-bold tracking-widest opacity-70"
-              >Académica</span
-            >
-          </div>
-          <div
-            class="bg-white/10 border border-white/20 p-8 rounded-2xl backdrop-blur-sm text-center"
-          >
-            <h3
-              class="text-escuela-yellow text-3xl font-black italic tracking-tighter"
-            >
-              Valores
-            </h3>
-            <span class="text-xs uppercase font-bold tracking-widest opacity-70"
-              >Humanos</span
-            >
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="noticias" class="py-24 bg-white">
-      <div class="max-w-7xl mx-auto px-12">
-        <h2 class="text-5xl font-black uppercase inline-block border-b-[12px] border-escuela-yellow italic">
-          Noticias
-        </h2>
-        <div id="news-container" class="mt-16 grid gap-12">
-          <!-- Las noticias se insertarán aquí mediante JavaScript -->
-        </div>
-      </div>
-    </section>
-
-    <section id="galeria" class="w-full py-24 bg-white">
-      <div class="max-w-7xl mx-auto px-12">
-        <h2
-          class="text-5xl font-black uppercase inline-block border-b-[12px] border-escuela-yellow italic"
-        >
-          Galería
-        </h2>
-
-        <div
-          class="mt-16 w-full border-4 border-dashed border-gray-200 rounded-3xl py-24 flex flex-col items-center justify-center text-center"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-20 w-20 text-gray-200 mb-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1"
-              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-            />
-          </svg>
-          <p class="text-xl font-bold text-gray-400 uppercase tracking-widest">
-            Próximamente registro de nuestras actividades 2026
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <footer class="bg-black text-white py-16 px-8 md:px-12">
-      <div
-        class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0 text-center md:text-left"
-      >
-        <div>
-          <h4 class="text-2xl font-black uppercase italic tracking-tighter">
-            Escuela Araucanía 510
-          </h4>
-          <p class="text-gray-500 text-sm mt-1 italic tracking-wide">
-            "Escuela con trayectoria educando en valores"
-          </p>
-        </div>
-        <div class="text-gray-400 text-xs uppercase tracking-[0.2em]">
-          <p class="mb-2">Labranza, Región de la Araucanía</p>
-          <p>
-            © 2026 — Desarrollado por
-            <span class="text-white font-bold">KOALINK</span>
-          </p>
-        </div>
-      </div>
+        
+        
     </footer>
 
-    <script src="js/main.js" defer></script>
-  </body>
+    
+    <script src="js/main.js"></script>
+</body>
 </html>
+

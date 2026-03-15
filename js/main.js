@@ -1,112 +1,99 @@
-// js/main.js - Desarrollado por KoaLink
+
+
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // 1. Selección de elementos del DOM
     const navbar = document.getElementById('navbar');
-    const navText = document.getElementById('nav-text');
-    const navLinksContainer = document.getElementById('nav-links');
     const menuBtn = document.getElementById('menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
-    const allLinks = document.querySelectorAll('nav a[href^="#"], .mobile-link');
 
-    // 2. Lógica de Scroll Unificada (Cambio de color y transparencia)
+    // 1. Control de Scroll (Flat Navbar)
     window.addEventListener('scroll', () => {
-        const isScrolled = window.scrollY > 80;
-
-        // Toggle de clases para el contenedor del Navbar
-        navbar.classList.toggle('bg-white', isScrolled);
-        navbar.classList.toggle('shadow-xl', isScrolled);
-        navbar.classList.toggle('py-3', isScrolled);
-        navbar.classList.toggle('bg-transparent', !isScrolled);
-        navbar.classList.toggle('py-6', !isScrolled);
-
-        // Ajuste de colores de texto y sombras
-        if (isScrolled) {
-            navText.classList.replace('text-white', 'text-black');
-            navText.classList.remove('shadow-text');
-            navLinksContainer.classList.replace('text-white', 'text-black');
-            navLinksContainer.classList.remove('shadow-text');
-            menuBtn.classList.replace('text-white', 'text-black');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled'); // El CSS maneja el cambio a blanco/negro
         } else {
-            navText.classList.replace('text-black', 'text-white');
-            navText.classList.add('shadow-text');
-            navLinksContainer.classList.replace('text-black', 'text-white');
-            navLinksContainer.classList.add('shadow-text');
-            menuBtn.classList.replace('text-black', 'text-white');
+            navbar.classList.remove('scrolled');
         }
     });
 
-    // 3. Navegación Limpia (Evita el # en la URL)
-    allLinks.forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault(); // Evita que la URL cambie en la barra de direcciones
-
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-
-            if (targetSection) {
-                // Cálculo de posición compensando la altura del navbar fijo
-                const offsetTop = targetSection.offsetTop - 80;
-
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-
-                // Cerrar el menú móvil automáticamente tras clickear (si está abierto)
-                if (!mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                }
-            }
-        });
-    });
-
-    // 4. Lógica del Menú Móvil (Abrir/Cerrar)
+    // 2. Menú Hamburguesa
     menuBtn.addEventListener('click', () => {
         mobileMenu.classList.toggle('hidden');
     });
 
-    console.log("KoaLink: Sistema de navegación y scroll optimizado correctamente.");
+    // 3. URLs Limpias y Scroll Suave
+    document.querySelectorAll('a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            // Si el enlace es un ancla interna
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+                // Cerrar menú móvil si se usa ancla
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    });
 
-    // Sección de noticias dinámicas
-  
-    const noticias = [
-        {
-            title: "Inicio de clases 2026",
-            date: "Proximamente",
-            content: "La comunidad educativa se reúne para celebrar el inicio del nuevo año escolar."
-        }
-    ];
-
-    function renderNoticias() {
-        const container = document.getElementById('news-container');
+    // 4. Inyección de Noticias en Home (Ejemplo dinámico)
+    const renderNoticias = () => {
+        const container = document.getElementById('noticias-container');
         if (!container) return;
 
-        if (noticias.length === 0) {
-            container.innerHTML = '<p class="text-center text-gray-500">No hay noticias disponibles por el momento.</p>';
-            return;
-        }
+        const data = [
+            { 
+                titulo: "Excelencia SNED 2026", 
+                tag: "Institucional", 
+                img: "img/1000078178.png",
+                resumen: "Nuestra escuela obtiene el 100% de reconocimiento ministerial."
+            },
+            { 
+                titulo: "Nuevo Diario Estudiantil", 
+                tag: "Voz Estudiantil", 
+                img: "img/escuelaFront.jpg",
+                resumen: "Lanzamos nuestra plataforma digital dirigida por alumnos."
+            }
+        ];
 
-        noticias.forEach(nota => {
-            const article = document.createElement('article');
-            article.className = 'border-l-4 border-escuela-yellow pl-6';
-
-            const titulo = document.createElement('h3');
-            titulo.className = 'text-2xl font-bold mb-1';
-            titulo.textContent = nota.title;
-
-            const fecha = document.createElement('p');
-            fecha.className = 'text-gray-500 text-sm mb-4';
-            fecha.textContent = nota.date;
-
-            const texto = document.createElement('p');
-            texto.className = 'text-gray-800';
-            texto.textContent = nota.content;
-
-            article.append(titulo, fecha, texto);
-            container.append(article);
-        });
-    }
+        container.innerHTML = data.map(n => `
+            <div class="bg-white rounded-3xl overflow-hidden group cursor-pointer border border-gray-100">
+                <div class="aspect-video overflow-hidden">
+                    <img src="${n.img}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                </div>
+                <div class="p-8">
+                    <span class="text-[10px] font-black uppercase text-amber-500 tracking-widest">${n.tag}</span>
+                    <h3 class="text-xl font-black uppercase mt-2 italic">${n.titulo}</h3>
+                    <p class="text-sm text-gray-500 mt-4 leading-relaxed">${n.resumen}</p>
+                </div>
+            </div>
+        `).join('');
+    };
 
     renderNoticias();
+
+    const lightbox = document.getElementById('himno-lightbox');
+const btnAbrir = document.getElementById('btn-ver-himno');
+const btnCerrar = document.getElementById('cerrar-himno');
+
+if (btnAbrir && lightbox) {
+    btnAbrir.onclick = () => {
+        lightbox.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const cerrar = () => {
+        lightbox.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    };
+
+    btnCerrar.onclick = cerrar;
+    lightbox.onclick = (e) => { if (e.target === lightbox) cerrar(); };
+}
+
+
 });
