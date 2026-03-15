@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterBtns = document.querySelectorAll('.gallery-filter-btn');
     const lightbox = document.getElementById('gallery-lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
-    const btnScrollTop = document.getElementById('btn-scroll-top');
 
     /**
      * RENDERIZAR FOTOS

@@ -6,7 +6,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     
     const anuncios = [
-        {
+       /* {
             titulo: "Reunión de Apoderados - Marzo",
             fecha: "18 de Marzo, 2026",
             categoria: "Reuniones",
@@ -22,18 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </ul>
                 <p class="bg-gray-100 p-4 rounded-xl italic text-sm">Lugar: Gimnasio de la escuela a las 18:00 hrs. Su asistencia es fundamental.</p>
             `
-        },
-        {
-            titulo: "Vacunación Escolar 2026",
-            fecha: "01 de Abril, 2026",
-            categoria: "Salud",
-            prioridad: "alta",
-            resumen: "Proceso para 1ero, 4to, 5to y 8vo básico.",
-            contenido: `
-                <p>Informamos que el personal del CESFAM Labranza realizará el proceso de vacunación anual en nuestras dependencias.</p>
-                <p class="mt-4">Es obligatorio que los alumnos asistan con su carnet de identidad o libreta de familia. En caso de alergias severas, favor informar previamente al profesor jefe.</p>
-            `
-        }
+        } */
     ];
 
     const container = document.getElementById('anuncios-grid');

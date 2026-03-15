@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mantenimiento | Escuela Araucanía 510</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .animate-pulse-slow {
+            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+    </style>
+    <script>
+        // Configuración de colores institucionales para Tailwind
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'escuela-yellow': '#facc15', // El amarillo que estamos usando
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-black h-screen w-full flex flex-col items-center justify-center text-center p-6 overflow-hidden">
+
+    <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] border-[40px] border-escuela-yellow rounded-full"></div>
+        <div class="absolute bottom-[-5%] right-[-5%] w-[30%] h-[30%] border-[20px] border-white rounded-full"></div>
+    </div>
+
+    <main class="relative z-10 space-y-8 animate-fade-in">
+        <div class="inline-block border-2 border-escuela-yellow px-4 py-1 rounded-full">
+            <span class="text-escuela-yellow text-[10px] font-black uppercase tracking-[0.4em] animate-pulse-slow">
+                Modo Mantenimiento
+            </span>
+        </div>
+
+        <div class="space-y-2">
+            <h1 class="text-white text-6xl md:text-9xl font-black uppercase italic leading-none">
+                Afinando<br>
+                <span class="text-escuela-yellow">Detalles</span>
+            </h1>
+        </div>
+
+        <div class="max-w-md mx-auto space-y-4">
+            <p class="text-gray-400 font-bold uppercase tracking-widest text-xs md:text-sm leading-relaxed">
+                Estamos actualizando el repositorio de documentos para brindarte una mejor experiencia.
+            </p>
+            
+            <div class="flex items-center justify-center space-x-4 pt-4">
+                <div class="h-[2px] w-12 bg-escuela-yellow"></div>
+                <span class="text-white font-black italic uppercase text-lg">Volvemos Pronto</span>
+                <div class="h-[2px] w-12 bg-escuela-yellow"></div>
+            </div>
+        </div>
+
+        <div class="pt-12">
+            <p class="text-gray-600 text-[10px] font-black uppercase tracking-[0.5em]">
+                Desarrollado por KoaLink — 2026
+            </p>
+        </div>
+    </main>
+
+    <style>
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+
+</body>
+</html>
