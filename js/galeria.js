@@ -1,25 +1,18 @@
-/**
- * js/galeria.js - Motor de Galería Dinámica
- * Desarrollado por KoaLink para Escuela Araucanía 510
- */
 
 document.addEventListener('DOMContentLoaded', () => {
     
     // 1. BASE DE DATOS DE IMÁGENES
     const imagenes = [
-        { url: "img/escuelaFront.jpg", categoria: "Infraestructura", titulo: "Patio Principal" },
-        { url: "img/escuelaFront.jpg", categoria: "Eventos", titulo: "Gala Aniversario" },
-        { url: "img/escuelaFront.jpg", categoria: "Talleres", titulo: "Taller de Robótica" },
-        { url: "img/escuelaFront.jpg", categoria: "Deportes", titulo: "Equipo de Fútbol" },
-        { url: "img/escuelaFront.jpg", categoria: "Infraestructura", titulo: "Nuevas Multicanchas" },
-        { url: "img/escuelaFront.jpg", categoria: "Eventos", titulo: "Certificación SNED" },
-        // Agrega más objetos aquí según necesites
+        { url: "img/mural1.jpg", categoria: "Infraestructura", titulo: "Mural segundo piso" },
+        { url: "img/mural2.jpg", categoria: "Infraestructura", titulo: "Mural segundo piso" },
+        { url: "img/eventoCirco1.jpg", categoria: "Eventos", titulo: "Circo" },
     ];
 
     const grid = document.getElementById('gallery-grid');
     const filterBtns = document.querySelectorAll('.gallery-filter-btn');
     const lightbox = document.getElementById('gallery-lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
+    const btnCerrar = document.getElementById('close-gallery'); // Referencia al botón X
 
     /**
      * RENDERIZAR FOTOS
@@ -39,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             item.onclick = () => {
                 lightboxImg.src = img.url;
                 lightbox.classList.remove('hidden');
+                lightbox.classList.add('flex'); // Asegura el centrado si usas flex
                 document.body.style.overflow = 'hidden';
             };
 
@@ -70,17 +64,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-
-
     /**
-     * CERRAR LIGHTBOX
+     * LÓGICA PARA CERRAR EL LIGHTBOX (AÑADIDO)
      */
-    lightbox.onclick = (e) => {
-        if (e.target !== lightboxImg) {
+    const cerrarGaleria = () => {
+        if (lightbox) {
             lightbox.classList.add('hidden');
-            document.body.style.overflow = 'auto';
+            lightbox.classList.remove('flex');
+            document.body.style.overflow = 'auto'; // Devuelve el scroll a la página
         }
     };
+
+    // Cerrar al hacer clic en la X
+    if (btnCerrar) {
+        btnCerrar.onclick = (e) => {
+            e.stopPropagation();
+            cerrarGaleria();
+        };
+    }
+
+    // Cerrar al hacer clic en el fondo negro (fuera de la imagen)
+    if (lightbox) {
+        lightbox.onclick = (e) => {
+            if (e.target === lightbox) {
+                cerrarGaleria();
+            }
+        };
+    }
+
+    // Cerrar al presionar la tecla Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === "Escape") cerrarGaleria();
+    });
 
     // Inicializar
     renderGallery();

@@ -1,99 +1,106 @@
-
+/**
+ * js/main.js - Motor Principal Escuela Araucanía 510
+ * Desarrollado por KoaLink
+ * Centraliza: Navbar, Menú Móvil, Modales y Utilidades.
+ */
 
 document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- 1. REFERENCIAS DE ELEMENTOS ---
     const navbar = document.getElementById('navbar');
     const menuBtn = document.getElementById('menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
+    
+    // Referencias para el Modal del Himno (Si existen en la página)
+    const btnAbrirHimno = document.getElementById('abrir-himno') || document.getElementById('btn-himno-trigger');
+    const modalHimno = document.getElementById('modal-himno') || document.getElementById('himno-modal');
+    const btnCerrarHimno = document.getElementById('cerrar-himno') || document.getElementById('close-himno');
 
-    // 1. Control de Scroll (Flat Navbar)
-    window.addEventListener('scroll', () => {
+    // --- 2. CONTROL DE SCROLL (NAVBAR) ---
+    const handleScroll = () => {
         if (window.scrollY > 50) {
-            navbar.classList.add('scrolled'); // El CSS maneja el cambio a blanco/negro
+            navbar?.classList.add('scrolled');
         } else {
-            navbar.classList.remove('scrolled');
+            navbar?.classList.remove('scrolled');
         }
-    });
+    };
 
-    // 2. Menú Hamburguesa
-    menuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-    });
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Ejecutar al inicio por si la página carga con scroll
 
-    // 3. URLs Limpias y Scroll Suave
-    document.querySelectorAll('a').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            
-            // Si el enlace es un ancla interna
-            if (href.startsWith('#')) {
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-                // Cerrar menú móvil si se usa ancla
+    // --- 3. MENÚ MÓVIL (HAMBURGUESA) ---
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Cerrar menú al hacer clic en un enlace (para anclas internas)
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.onclick = () => mobileMenu.classList.add('hidden');
+        });
+
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
                 mobileMenu.classList.add('hidden');
             }
         });
-    });
+    }
 
-    // 4. Inyección de Noticias en Home (Ejemplo dinámico)
-    const renderNoticias = () => {
-        const container = document.getElementById('noticias-container');
-        if (!container) return;
-
-        const data = [
-            { 
-                titulo: "Excelencia SNED 2026", 
-                tag: "Institucional", 
-                img: "img/1000078178.png",
-                resumen: "Nuestra escuela obtiene el 100% de reconocimiento ministerial."
-            },
-            { 
-                titulo: "Nuevo Diario Estudiantil", 
-                tag: "Voz Estudiantil", 
-                img: "img/escuelaFront.jpg",
-                resumen: "Lanzamos nuestra plataforma digital dirigida por alumnos."
-            }
-        ];
-
-        container.innerHTML = data.map(n => `
-            <div class="bg-white rounded-3xl overflow-hidden group cursor-pointer border border-gray-100">
-                <div class="aspect-video overflow-hidden">
-                    <img src="${n.img}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
-                </div>
-                <div class="p-8">
-                    <span class="text-[10px] font-black uppercase text-amber-500 tracking-widest">${n.tag}</span>
-                    <h3 class="text-xl font-black uppercase mt-2 italic">${n.titulo}</h3>
-                    <p class="text-sm text-gray-500 mt-4 leading-relaxed">${n.resumen}</p>
-                </div>
-            </div>
-        `).join('');
-    };
-
-    renderNoticias();
-
-    const lightbox = document.getElementById('himno-lightbox');
-const btnAbrir = document.getElementById('btn-ver-himno');
-const btnCerrar = document.getElementById('cerrar-himno');
-
-if (btnAbrir && lightbox) {
-    btnAbrir.onclick = () => {
-        lightbox.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-    };
-
-    const cerrar = () => {
-        lightbox.classList.add('hidden');
+    // --- 4. LÓGICA DE MODALES (HIMNO / GENERAL) ---
+    const cerrarModal = (modalElement) => {
+        modalElement.classList.add('hidden');
+        modalElement.classList.remove('flex');
         document.body.style.overflow = 'auto';
     };
 
-    btnCerrar.onclick = cerrar;
-    lightbox.onclick = (e) => { if (e.target === lightbox) cerrar(); };
-}
+    const abrirModal = (modalElement) => {
+        modalElement.classList.remove('hidden');
+        modalElement.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+    };
 
+    // Inicializar Himno solo si los elementos están presentes
+    if (btnAbrirHimno && modalHimno) {
+        btnAbrirHimno.onclick = (e) => {
+            e.preventDefault();
+            abrirModal(modalHimno);
+        };
 
+        if (btnCerrarHimno) {
+            btnCerrarHimno.onclick = () => cerrarModal(modalHimno);
+        }
+
+        // Cerrar al hacer clic en el fondo oscuro
+        modalHimno.onclick = (e) => {
+            if (e.target === modalHimno) cerrarModal(modalHimno);
+        };
+    }
+
+    // Cerrar cualquier modal abierto con la tecla Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === "Escape") {
+            const modals = document.querySelectorAll('.fixed:not(.hidden)');
+            modals.forEach(m => {
+                // No cerramos el navbar, solo modales de imagen/anuncios
+                if (m.id !== 'navbar') {
+                    m.classList.add('hidden');
+                    m.classList.remove('flex');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+    });
+
+    // --- 5. INICIALIZACIÓN DE ICONOS LUCIDE ---
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+
+    // --- 6. LOG DE BIENVENIDA (ESTILO KOALINK) ---
+    console.log("%c Escuela Araucanía 510 %c v1.0 - KoaLink Deployment ", 
+        "background: #facc15; color: #000; font-weight: bold; padding: 4px; border-radius: 4px 0 0 4px;",
+        "background: #000; color: #fff; font-weight: bold; padding: 4px; border-radius: 0 4px 4px 0;"
+    );
 });

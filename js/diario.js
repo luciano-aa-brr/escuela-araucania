@@ -1,65 +1,12 @@
 /**
  * js/diario.js - Motor de contenido Voz Estudiantil
  * Desarrollado por KoaLink para Escuela Araucanía 510
+ * Este archivo depende de js/data.js
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     
-    // 1. BASE DE DATOS DE ARTÍCULOS ACTUALES
-    const articulosActuales = [
-        {
-            titulo: "Entrevista exclusiva: Nuestra Visión de la Excelencia",
-            autor: "Martina González, 8vo Básico",
-            fecha: "12 Marzo, 2026",
-            categoria: "Entrevistas",
-            imagen: "img/escuelaFront.jpg",
-            resumen: "Conversamos con la dirección sobre el hito del 100% SNED.",
-            textoCompleto: `
-                <p>La obtención del 100% de la Excelencia Académica (SNED) no es solo un número, es el reflejo de un trabajo incansable. El director destacó que este logro pertenece a cada familia de Labranza que confía en nosotros.</p>
-                <blockquote class="border-l-4 border-escuela-yellow pl-4 italic my-6 font-bold text-xl">"Nuestro compromiso es que cada niño y niña se sienta capaz de alcanzar sus sueños."</blockquote>
-                <p>Durante la entrevista, se discutieron los nuevos planes de infraestructura y el fortalecimiento de los talleres extracurriculares para el segundo semestre de 2026.</p>
-            `
-        },
-        {
-            titulo: "Deportes: El equipo de fútbol retoma entrenamientos",
-            autor: "Sebastián Soto, 7mo Básico",
-            fecha: "10 Marzo, 2026",
-            categoria: "Deportes",
-            imagen: "img/escuelaFront.jpg",
-            resumen: "Nuestra selección se prepara para el campeonato regional.",
-            textoCompleto: `
-                <p>Tras un merecido descanso, los "Halcones" de la Escuela Araucanía volvieron a las canchas. Con un entrenamiento enfocado en la resistencia física y la táctica de equipo, el entrenador se mostró optimista.</p>
-                <p>El próximo encuentro será contra el liceo vecino, donde se definirá el paso a las semifinales regionales. ¡Todo el apoyo para nuestros deportistas!</p>
-            `
-        },
-        {
-            titulo: "Opinión: ¿Por qué cuidar nuestro entorno escolar?",
-            autor: "Consejo de Estudiantes",
-            fecha: "08 Marzo, 2026",
-            categoria: "Opinión",
-            imagen: "img/escuelaFront.jpg",
-            resumen: "Reflexiones sobre la importancia de la limpieza y el respeto.",
-            textoCompleto: `
-                <p>Mantener nuestra escuela limpia no es solo tarea de los auxiliares, es una responsabilidad compartida. Como estudiantes, pasamos gran parte del día aquí y este es nuestro segundo hogar.</p>
-                <p>Hacemos un llamado a utilizar los puntos de reciclaje y a cuidar el mobiliario que con tanto esfuerzo se ha renovado para nosotros.</p>
-            `
-        }
-    ];
-
-    // 2. BASE DE DATOS DE EDICIONES ANTERIORES
-    const articulosAnteriores = [
-        {
-            titulo: "Archivo 2025: Gala de Fin de Año",
-            autor: "Redacción 2025",
-            fecha: "Diciembre, 2025",
-            categoria: "Cultura",
-            imagen: "img/escuelaFront.jpg",
-            resumen: "Un resumen de las mejores presentaciones artísticas del año pasado.",
-            textoCompleto: `<p>Recordamos la emotiva ceremonia donde los octavos básicos se despidieron de su etapa escolar...</p>`
-        }
-    ];
-
-    // 3. REFERENCIAS AL DOM
+    // 1. REFERENCIAS AL DOM
     const container = document.getElementById('diario-grid');
     const heroContent = document.getElementById('hero-content');
     const modal = document.getElementById('noticia-modal');
@@ -68,11 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnCargarMas = document.getElementById('btn-cargar-mas');
     const botonesFiltro = document.querySelectorAll('.filter-btn');
 
+    // 2. ESTADOS
     let mostrandoAnteriores = false;
     let filtroActual = "Todos";
 
     /**
      * ACTUALIZAR PORTADA (HERO)
+     * Ajusta el texto según la categoría seleccionada
      */
     const actualizarPortada = (categoria) => {
         if (!heroContent) return;
@@ -91,15 +40,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * RENDERIZAR ARTÍCULOS EN EL GRID
+     * Filtra y muestra las noticias del array global 'articulosDiario' (definido en data.js)
      */
     const renderArticulos = () => {
-        if (!container) return;
+        if (!container || typeof articulosDiario === 'undefined') {
+            console.error("KoaLink: No se encontró el contenedor o el archivo data.js no está vinculado.");
+            return;
+        }
+
         container.innerHTML = '';
 
-        // Decidimos qué lista usar
-        const listaBase = mostrandoAnteriores ? [...articulosActuales, ...articulosAnteriores] : articulosActuales;
+        // Si tuvieras una sección de "Ediciones Anteriores" en data.js, aquí harías el merge
+        // Por ahora usamos la lista principal
+        const listaBase = articulosDiario;
         
-        // Filtramos según el botón seleccionado
         const filtrados = filtroActual === "Todos" 
             ? listaBase 
             : listaBase.filter(art => art.categoria === filtroActual);
@@ -107,23 +61,28 @@ document.addEventListener('DOMContentLoaded', () => {
         actualizarPortada(filtroActual);
 
         if (filtrados.length === 0) {
-            container.innerHTML = `<p class="col-span-full text-center py-20 text-gray-400 font-black uppercase italic tracking-widest">No hay artículos en esta categoría.</p>`;
+            container.innerHTML = `
+                <div class="col-span-full text-center py-20 animate-fade-in">
+                    <p class="text-gray-400 font-black uppercase italic tracking-widest text-lg">No hay noticias en esta sección por ahora.</p>
+                    <p class="text-xs text-gray-300 uppercase mt-2 font-bold tracking-[0.2em]">KoaLink — Desarrollo</p>
+                </div>
+            `;
             return;
         }
 
         filtrados.forEach(art => {
             const article = document.createElement('article');
             article.className = "group cursor-pointer animate-fade-in-down";
-            article.onclick = () => abrirNoticia(art); // Abrir Modal al clic
+            article.onclick = () => abrirNoticia(art); 
 
             article.innerHTML = `
-                <div class="aspect-video overflow-hidden bg-gray-200 rounded-2xl mb-4 md:mb-6">
+                <div class="aspect-video overflow-hidden bg-gray-200 rounded-2xl mb-4 md:mb-6 border-2 border-transparent group-hover:border-escuela-yellow transition-all duration-500">
                     <img src="${art.imagen}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                 </div>
                 <div class="space-y-2 md:space-y-3">
                     <span class="bg-escuela-yellow text-black text-[9px] font-black uppercase px-2 py-1 rounded-sm">${art.categoria}</span>
                     <h2 class="text-xl md:text-2xl font-black uppercase italic leading-tight group-hover:text-amber-500 transition">${art.titulo}</h2>
-                    <p class="text-gray-500 text-sm leading-relaxed line-clamp-3">${art.resumen}</p>
+                    <p class="text-gray-500 text-sm leading-relaxed line-clamp-3 font-medium">${art.resumen}</p>
                 </div>
             `;
             container.appendChild(article);
@@ -131,9 +90,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     /**
-     * LÓGICA DEL MODAL (NOTICIA EXTENSA)
+     * LÓGICA DEL MODAL (NOTICIA COMPLETA)
      */
     const abrirNoticia = (noticia) => {
+        if (!modal || !modalBody) return;
+
         modalBody.innerHTML = `
             <span class="bg-escuela-yellow text-black text-xs font-black uppercase px-3 py-1 rounded-full">${noticia.categoria}</span>
             <h2 class="text-3xl md:text-5xl font-black uppercase italic my-6 leading-tight">${noticia.titulo}</h2>
@@ -146,24 +107,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
 
-            <img src="${noticia.imagen}" class="w-full h-64 md:h-96 object-cover rounded-3xl mb-8">
+            <img src="${noticia.imagen}" class="w-full h-64 md:h-96 object-cover rounded-3xl mb-8 shadow-2xl">
             
             <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed font-medium">
                 ${noticia.textoCompleto}
             </div>
+            
+            <div class="mt-12 pt-8 border-t border-gray-100 text-center">
+                <p class="text-[10px] font-black uppercase text-gray-400 tracking-[0.5em]">Voz Estudiantil — Escuela Araucanía 510</p>
+            </div>
         `;
         modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden'; // Evita scroll de fondo
+        document.body.style.overflow = 'hidden'; // Bloquea scroll de fondo
     };
 
     const cerrarModal = () => {
         modal.classList.add('hidden');
-        document.body.style.overflow = 'auto';
+        document.body.style.overflow = 'auto'; // Reactiva scroll
     };
 
     if (btnCerrarModal) btnCerrarModal.onclick = cerrarModal;
     
-    // Cerrar al hacer clic fuera del modal
+    // Cerrar al hacer clic en el fondo oscuro
     window.onclick = (e) => { if (e.target == modal) cerrarModal(); };
 
     /**
@@ -184,24 +149,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /**
-     * BOTÓN EDICIONES ANTERIORES (TOGGLE)
+     * BOTÓN EDICIONES ANTERIORES (OPCIONAL)
      */
     if (btnCargarMas) {
         btnCargarMas.addEventListener('click', () => {
             mostrandoAnteriores = !mostrandoAnteriores;
-            
-            if (mostrandoAnteriores) {
-                btnCargarMas.textContent = "Ocultar ediciones anteriores";
-                btnCargarMas.classList.add('bg-black', 'text-white');
-            } else {
-                btnCargarMas.textContent = "Ver ediciones anteriores";
-                btnCargarMas.classList.remove('bg-black', 'text-white');
-                window.scrollTo({ top: container.offsetTop - 150, behavior: 'smooth' });
-            }
+            btnCargarMas.textContent = mostrandoAnteriores ? "Ocultar anteriores" : "Ver ediciones anteriores";
             renderArticulos();
         });
     }
 
-    // Inicializar
+    // Carga inicial
     renderArticulos();
 });
